@@ -1,0 +1,152 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { SectionTitle } from "@components/features/section-title";
+import { FeaturedProjects } from "@components/features/featured-projects";
+import { StatsGrid } from "@components/features/stats-grid";
+import PostCard from "@components/features/posts/PostCard.astro";
+import { Icon } from "astro-icon/components";
+
+import { getFeaturedProjects } from "../data/projects";
+import { getSortedPosts } from "@utils/content-utils";
+
+const featuredProjects = getFeaturedProjects().slice(0, 6);
+const allPosts = await getSortedPosts();
+const recentPosts = allPosts.slice(0, 4);
+
+const stats = [
+	{
+		title: "大业务板块",
+		value: "6",
+		subtitle: "AI SaaS / 硬件 / 教育 / 企业服务 / 全球化 / 孵化器",
+		icon: "material-symbols:dashboard-customize",
+	},
+	{
+		title: "产品线",
+		value: "17",
+		subtitle: "覆盖多领域的产品矩阵",
+		icon: "material-symbols:inventory-2",
+	},
+	{
+		title: "公文语料",
+		value: "800万+",
+		subtitle: "高质量政务公文训练数据",
+		icon: "material-symbols:description",
+	},
+	{
+		title: "创客夜",
+		value: "44",
+		subtitle: "期技术分享与创业交流活动",
+		icon: "material-symbols:nightlight",
+	},
+	{
+		title: "国家赛事舞台",
+		value: "60+",
+		subtitle: "创新创业大赛获奖与参展",
+		icon: "material-symbols:emoji-events",
+	},
+	{
+		title: "媒体报道",
+		value: "18+",
+		subtitle: "权威媒体关注与报道",
+		icon: "material-symbols:newspaper",
+	},
+];
+---
+
+<MainGridLayout>
+	<script>
+		import("../scripts/right-sidebar-layout.js");
+		import { loadIconify } from "../utils/icon-loader";
+
+		loadIconify().catch((error) => {
+			console.error("Failed to load Iconify:", error);
+		});
+	</script>
+
+	<div
+		class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32"
+	>
+		<div class="card-base z-10 px-6 sm:px-9 py-6 relative w-full">
+			<!-- Studio Introduction -->
+			<section class="mb-10">
+				<SectionTitle title="关于硅步工作室" />
+				<div class="mb-6 text-black/70 dark:text-white/70 leading-relaxed">
+					<p class="mb-4">
+						硅步工作室是一家专注于人工智能、硬件研发与创新创业教育的科技工作室。
+						我们以"硅积跬步，以至千里"为理念，致力于用技术创造价值，用创新驱动发展。
+					</p>
+					<p class="mb-4">
+						工作室业务涵盖 AI SaaS 产品、智能硬件、青少年创客教育、企业数字化服务、
+						东南亚出海以及全球产品孵化六大板块，累计打造十余款产品与服务，
+						服务政府、企业与教育机构等众多客户。
+					</p>
+					<p>
+						我们相信技术的力量，更相信脚踏实地的积累。每一行代码、每一次迭代，
+						都是我们向着目标迈进的坚实一步。
+					</p>
+				</div>
+				<a
+					href="/about/"
+					class="btn-regular inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-(--primary) hover:text-(--primary)"
+				>
+					了解更多
+					<Icon
+						name="material-symbols:arrow-forward-rounded"
+						class="text-lg"
+					/>
+				</a>
+			</section>
+
+			<!-- Featured Projects -->
+			<section class="mb-10">
+				<FeaturedProjects
+					projects={featuredProjects}
+					title="精选项目"
+					class="mb-2"
+				/>
+				<div class="flex justify-end mt-6">
+					<a
+						href="/projects/"
+						class="btn-regular inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-(--primary) hover:text-(--primary)"
+					>
+						查看全部项目
+						<Icon
+							name="material-symbols:arrow-forward-rounded"
+							class="text-lg"
+						/>
+					</a>
+				</div>
+			</section>
+
+			<!-- Recent Journal -->
+			<section class="mb-10">
+				<SectionTitle title="最新动态" />
+				<div class="flex flex-col gap-4">
+					{
+						recentPosts.map((post) => (
+							<PostCard entry={post} />
+						))
+					}
+				</div>
+				<div class="flex justify-end mt-6">
+					<a
+						href="/archive/"
+						class="btn-regular inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-(--primary) hover:text-(--primary)"
+					>
+						查看全部
+						<Icon
+							name="material-symbols:arrow-forward-rounded"
+							class="text-lg"
+						/>
+					</a>
+				</div>
+			</section>
+
+			<!-- Numbers -->
+			<section>
+				<SectionTitle title="关于我们的数字" />
+				<StatsGrid stats={stats} columns={3} />
+			</section>
+		</div>
+	</div>
+</MainGridLayout>
