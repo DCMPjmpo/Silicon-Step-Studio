@@ -121,7 +121,7 @@ export const projectsData: Project[] = [
 		status: "in-progress",
 		startDate: "2025-06-01",
 		tags: ["硬件", "工业控制", "嵌入式"],
-		showImage: true,
+		showImage: false,
 	},
 	// Education 类
 	{
