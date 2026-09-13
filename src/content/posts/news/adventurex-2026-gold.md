@@ -4,7 +4,7 @@ published: 2026-08-15
 description: "在 AdventureX 2026 全球创新挑战赛中，硅步工作室凭借创新的 AI 产品方案从 60+ 国家与地区的参赛队伍中脱颖而出，荣获金奖。"
 tags: ["荣誉", "竞赛", "AI", "AdventureX"]
 category: "News"
-image: ""
+image: "/images/posts/adventurex-2026.jpg"
 pinned: true
 ---
 

@@ -38,7 +38,7 @@ export const projectsData: Project[] = [
 		startDate: "2024-06-01",
 		featured: true,
 		tags: ["AI", "SaaS", "智能制造", "计算机视觉"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "wenshu-ai",
@@ -54,7 +54,7 @@ export const projectsData: Project[] = [
 		startDate: "2024-03-01",
 		featured: true,
 		tags: ["AI", "SaaS", "政务", "大模型"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "csca",
@@ -70,7 +70,9 @@ export const projectsData: Project[] = [
 		startDate: "2025-01-01",
 		featured: true,
 		tags: ["出海", "SaaS", "东南亚", "跨境"],
-		showImage: false,
+		showImage: true,
+		visitUrl: "https://www.pilarcore.online/",
+		sourceCode: "https://github.com/DCMPjmpo/CSCA-agent",
 	},
 	{
 		id: "panyuan-lobster",
@@ -103,7 +105,7 @@ export const projectsData: Project[] = [
 		startDate: "2024-09-01",
 		featured: true,
 		tags: ["硬件", "边缘计算", "AI 芯片"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "pilarcore",
@@ -118,7 +120,7 @@ export const projectsData: Project[] = [
 		status: "in-progress",
 		startDate: "2025-06-01",
 		tags: ["硬件", "工业控制", "嵌入式"],
-		showImage: false,
+		showImage: true,
 	},
 	// Education 类
 	{
@@ -135,7 +137,7 @@ export const projectsData: Project[] = [
 		startDate: "2024-03-01",
 		featured: true,
 		tags: ["教育", "AI", "青少年", "创客"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "ai-bootcamp",
@@ -197,7 +199,7 @@ export const projectsData: Project[] = [
 		status: "completed",
 		startDate: "2024-08-01",
 		tags: ["B2G", "安防", "计算机视觉", "边缘计算"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "subsidy-assist",

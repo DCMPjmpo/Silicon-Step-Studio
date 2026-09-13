@@ -4,7 +4,7 @@ published: 2026-07-20
 description: "CSCA 南洋出海局团队赴越南胡志明市、河内进行商务调研，考察东南亚 AI 市场机会。"
 tags: ["出海", "越南", "东南亚", "市场调研"]
 category: "Global"
-image: ""
+image: "/images/posts/vietnam-trip.jpg"
 ---
 
 七月，CSCA 南洋出海局团队奔赴越南，在胡志明市与河内进行了为期一周的商务调研。
