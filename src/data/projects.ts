@@ -108,21 +108,6 @@ export const projectsData: Project[] = [
 		tags: ["硬件", "边缘计算", "AI 芯片"],
 		showImage: true,
 	},
-	{
-		id: "pilarcore",
-		title: "PilarCore",
-		englishName: "PilarCore",
-		oneLiner: "面向工业场景的核心控制模组",
-		description:
-			"PilarCore 是专为工业自动化场景设计的核心控制模组，集成高性能处理器和丰富接口，支持多种工业协议，为智能制造提供可靠的底层算力支撑。",
-		image: "/images/projects/pilarcore.jpg",
-		category: "hardware",
-		techStack: ["C", "RTOS", "ARM", "FPGA"],
-		status: "in-progress",
-		startDate: "2025-06-01",
-		tags: ["硬件", "工业控制", "嵌入式"],
-		showImage: false,
-	},
 	// Education 类
 	{
 		id: "sparkx",
@@ -185,7 +170,7 @@ export const projectsData: Project[] = [
 		status: "completed",
 		startDate: "2024-05-01",
 		tags: ["企业服务", "三维扫描", "B2G"],
-		showImage: false,
+		showImage: true,
 	},
 	{
 		id: "border-vision",
