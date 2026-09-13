@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硅步工作室网站 - 内容整理与优化指南</title>
+<style>
+  :root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+  .header {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+    color: white;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .header h1 { font-size: 32px; margin-bottom: 8px; }
+  .header p { font-size: 16px; opacity: 0.9; }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .container {
+    max-width: 900px;
+    margin: -24px auto 48px;
+    padding: 0 24px;
+  }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
+  }
+  .toc h2 { font-size: 18px; margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: var(--primary); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section h2 .num {
+    background: var(--primary);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .section h3 {
+    font-size: 16px;
+    margin: 20px 0 10px;
+    color: var(--primary-dark);
+  }
+  .section p { margin-bottom: 12px; color: var(--text); }
+  .section ul { padding-left: 20px; margin-bottom: 12px; }
+  .section li { margin-bottom: 6px; }
+  .status-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .status-done { background: #d1fae5; color: #065f46; }
+  .status-todo { background: #fef3c7; color: #92400e; }
+  .status-optional { background: #e0e7ff; color: #3730a3; }
+  .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    overflow-x: auto;
+    margin: 12px 0;
+    line-height: 1.5;
+  }
+  .code-block .comment { color: #64748b; }
+  .code-block .key { color: #38bdf8; }
+  .code-block .string { color: #4ade80; }
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  tr:hover { background: #f8fafc; }
+  .callout {
+    border-left: 4px solid;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .callout-info { border-color: var(--primary); background: #f0f9ff; }
+  .callout-warning { border-color: var(--warning); background: #fffbeb; }
+  .callout-danger { border-color: var(--danger); background: #fef2f2; }
+  .callout-success { border-color: var(--success); background: #f0fdf4; }
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    color: var(--primary);
+  }
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+  @media (max-width: 768px) {
+    .header { padding: 32px 16px; }
+    .header h1 { font-size: 24px; }
+    .section { padding: 20px; }
+    .section h2 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>硅步工作室网站 · 内容整理与优化指南</h1>
+  <p>AI Productization · Build · Explore · Ship</p>
+  <span class="badge">基于当前项目实际状态生成 · 2026.09.13</span>
+</div>
+
+<div class="container">
+  <div class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#img">图片资源整理</a> <span class="status-tag status-todo">待准备</span></li>
+      <li><a href="#url">产品外链补充</a> <span class="status-tag status-todo">待确认</span></li>
+      <li><a href="#articles">更多文章撰写</a> <span class="status-tag status-optional">可选</span></li>
+      <li><a href="#favicon">Favicon 替换</a> <span class="status-tag status-todo">待替换</span></li>
+      <li><a href="#social">社交链接补充</a> <span class="status-tag status-done">GitHub 已更新</span></li>
+      <li><a href="#checklist">最终检查清单</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. 图片资源 -->
+  <div class="section" id="img">
+    <h2><span class="num">1</span>图片资源整理</h2>
+
+    <p>当前状态：项目和文章的图片路径都已配置好，但 <strong>图片文件本身不存在</strong>，目录是空的。</p>
+
+    <div class="callout callout-danger">
+      <strong>问题：</strong>项目卡片图片路径指向 <code>/images/projects/jiecheng.jpg</code> 等，但对应目录下没有文件。文章封面 <code>image: ""</code> 全部为空。网站能运行，但图片位置会显示空白/默认图。
+    </div>
+
+    <h3>需要准备的图片清单</h3>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>用途</th><th>文件名</th><th>建议尺寸</th><th>格式</th><th>来源</th></tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" style="background:#f0f9ff;font-weight:600;">项目封面图（放 public/images/projects/）</td></tr>
+        <tr><td>捷程智造</td><td>jiecheng.jpg</td><td>1200×630</td><td>JPG</td><td>产品截图/宣传图</td></tr>
+        <tr><td>文枢 AI</td><td>wenshu-ai.jpg</td><td>1200×630</td><td>JPG</td><td>产品截图/宣传图</td></tr>
+        <tr><td>CSCA 南洋出海局</td><td>csca.jpg</td><td>1200×630</td><td>JPG</td><td>品牌LOGO/宣传图</td></tr>
+        <tr><td>磐元龙虾</td><td>panyuan-lobster.jpg</td><td>1200×630</td><td>JPG</td><td>养殖场景/产品图</td></tr>
+        <tr><td>FAST Hardware</td><td>fast-hardware.jpg</td><td>1200×630</td><td>JPG</td><td>硬件产品照</td></tr>
+        <tr><td>PilarCore</td><td>pilarcore.jpg</td><td>1200×630</td><td>JPG</td><td>模组产品照</td></tr>
+        <tr><td>SparkX 创造营</td><td>sparkx.jpg</td><td>1200×630</td><td>JPG</td><td>活动照片</td></tr>
+        <tr><td>AI 编程加速营</td><td>ai-bootcamp.jpg</td><td>1200×630</td><td>JPG</td><td>培训活动照片</td></tr>
+        <tr><td>AI 毕设辅导</td><td>graduation-project.jpg</td><td>1200×630</td><td>JPG</td><td>教学场景图</td></tr>
+        <tr><td>宇晨三维录入系统</td><td>yuchen-3d.jpg</td><td>1200×630</td><td>JPG</td><td>设备/软件截图</td></tr>
+        <tr><td>边境智慧视觉</td><td>border-vision.jpg</td><td>1200×630</td><td>JPG</td><td>系统界面截图</td></tr>
+        <tr><td>企业补贴协助</td><td>subsidy-assist.jpg</td><td>1200×630</td><td>JPG</td><td>平台界面截图</td></tr>
+        <tr><td>数字车库</td><td>digital-garage.jpg</td><td>1200×630</td><td>JPG</td><td>品牌图</td></tr>
+        <tr><td>Chemetall 推荐</td><td>chemetall.jpg</td><td>1200×630</td><td>JPG</td><td>系统架构图</td></tr>
+        <tr><td colspan="5" style="background:#f0f9ff;font-weight:600;">文章封面图（放 public/images/posts/ 或文章指定路径）</td></tr>
+        <tr><td>AdventureX 金奖</td><td>adventurex-2026.jpg</td><td>1200×630</td><td>JPG</td><td>比赛现场照片</td></tr>
+        <tr><td>越南商务调研</td><td>vietnam-trip.jpg</td><td>1200×630</td><td>JPG</td><td>调研活动照片</td></tr>
+        <tr><td>SparkX 夏令营</td><td>sparkx-camp.jpg</td><td>1200×630</td><td>JPG</td><td>夏令营活动照片</td></tr>
+        <tr><td>创客夜 44 期</td><td>maker-night.jpg</td><td>1200×630</td><td>JPG</td><td>活动照片</td></tr>
+        <tr><td>文枢 AI 迭代</td><td>wenshu-update.jpg</td><td>1200×630</td><td>JPG</td><td>产品界面截图</td></tr>
+        <tr><td>南宁 AI 生态</td><td>nanning-ai.jpg</td><td>1200×630</td><td>JPG</td><td>南宁城市/科技照片</td></tr>
+        <tr><td colspan="5" style="background:#f0f9ff;font-weight:600;">其他图片</td></tr>
+        <tr><td>工作室头像</td><td>avatar.webp</td><td>400×400</td><td>WEBP</td><td>工作室 LOGO</td></tr>
+        <tr><td>团队合照</td><td>team.jpg</td><td>1200×800</td><td>JPG</td><td>团队照片</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>操作步骤</h3>
+    <ul>
+      <li>准备好上述图片文件</li>
+      <li>项目封面图放到 <code>public/images/projects/</code> 目录</li>
+      <li>文章封面图放到 <code>public/images/posts/</code> 目录（需新建）</li>
+      <li>头像放到 <code>src/assets/images/avatar.webp</code></li>
+      <li>文章封面的路径在每篇文章的 frontmatter 中设置：<code>image: "/images/posts/adventurex-2026.jpg"</code></li>
+    </ul>
+
+    <div class="callout callout-info">
+      <strong>建议：</strong>图片文件大小控制在 200KB 以内，Astro 会自动进行 WebP 转换和懒加载。如果暂时没有真实图片，可以先不传，网站不会报错，只是图片位置显示空白。
+    </div>
+  </div>
+
+  <!-- 2. 产品外链 -->
+  <div class="section" id="url">
+    <h2><span class="num">2</span>产品外链补充</h2>
+
+    <p>当前状态：14 个项目的 <code>visitUrl</code>、<code>sourceCode</code>、<code>caseStudyUrl</code> 字段全部为空。</p>
+
+    <p>需要你提供哪些产品有真实线上地址。然后在 <code>src/data/projects.ts</code> 中补充即可：</p>
+
+    <div class="code-block">
+<span class="comment">// 在对应项目对象中添加这三个字段（都是可选的）</span>
+{
+  id: <span class="string">"wenshu-ai"</span>,
+  title: <span class="string">"文枢 AI"</span>,
+  <span class="comment">// ... 其他字段</span>
+  <span class="key">visitUrl</span>: <span class="string">"https://wenshu.ai"</span>,           <span class="comment">// 产品访问地址 → 显示"访问产品 →"按钮</span>
+  <span class="key">sourceCode</span>: <span class="string">"https://github.com/DCMPjmpo/wenshu"</span>, <span class="comment">// GitHub 地址 → 显示"源代码"按钮</span>
+  <span class="key">caseStudyUrl</span>: <span class="string">"/journal/wenshu-ai-iteration"</span>,      <span class="comment">// 案例研究 → 显示"查看案例"按钮</span>
+}</div>
+
+    <div class="callout callout-info">
+      <strong>规则：</strong>没有真实 URL 的产品不要编造。空着就不显示按钮，不影响布局。
+    </div>
+
+    <h3>你需要确认的清单</h3>
+    <ul class="checklist">
+      <li>捷程智造 — 有线上地址吗？</li>
+      <li>文枢 AI — 有线上地址吗？</li>
+      <li>CSCA 南洋出海局 — 有线上地址吗？</li>
+      <li>磐元龙虾 — 有线上地址吗？</li>
+      <li>FAST Hardware — 有线上地址吗？</li>
+      <li>数字车库 — 有线上地址吗？</li>
+      <li>Chemetall 推荐系统 — 有线上地址吗？</li>
+      <li>哪些项目有 GitHub 开源仓库？</li>
+      <li>哪些项目有对应的 Journal 文章可以作为案例研究？</li>
+    </ul>
+  </div>
+
+  <!-- 3. 更多文章 -->
+  <div class="section" id="articles">
+    <h2><span class="num">3</span>更多文章撰写</h2>
+
+    <p>当前状态：已有 6 篇文章，分布在 6 个分类下。</p>
+
+    <h3>现有文章</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>分类</th><th>文件名</th><th>标题</th></tr></thead>
+      <tbody>
+        <tr><td>news</td><td>adventurex-2026-gold.md</td><td>AdventureX 2026 金奖</td></tr>
+        <tr><td>global</td><td>vietnam-business-trip.md</td><td>越南商务调研</td></tr>
+        <tr><td>education</td><td>sparkx-summer-camp.md</td><td>SparkX 创造营</td></tr>
+        <tr><td>community</td><td>maker-night-44.md</td><td>创客夜第 44 期</td></tr>
+        <tr><td>product</td><td>wenshu-ai-iteration.md</td><td>文枢 AI 迭代记录</td></tr>
+        <tr><td>local</td><td>nanning-ai-ecosystem.md</td><td>南宁 AI 生态观察</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>建议新增的文章</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>分类</th><th>建议文件名</th><th>主题</th><th>优先级</th></tr></thead>
+      <tbody>
+        <tr><td>news</td><td>ai-hackathon-silver.md</td><td>AI HACKATHON 环球黑客松银奖复盘</td><td>高</td></tr>
+        <tr><td>news</td><td>iot-competition-first.md</td><td>全国大学生物联网设计竞赛一等奖</td><td>高</td></tr>
+        <tr><td>product</td><td>jiecheng-launch.md</td><td>捷程智造上线记</td><td>中</td></tr>
+        <tr><td>product</td><td>csca-southeast-asia.md</td><td>CSCA 出海东南亚市场分析</td><td>中</td></tr>
+        <tr><td>community</td><td>seeai-community.md</td><td>SeeAI 创新社区介绍</td><td>中</td></tr>
+        <tr><td>local</td><td>wuxiang-new-area.md</td><td>五象新区 AI 创业生态</td><td>低</td></tr>
+        <tr><td>education</td><td>ai-bootcamp-recap.md</td><td>AI 编程加速营结营总结</td><td>低</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>新建文章模板</h3>
+    <div class="code-block">
+---
+title: <span class="string">"文章标题"</span>
+pubDate: <span class="string">2026-09-10</span>
+description: <span class="string">"一句话描述"</span>
+category: <span class="string">"news"</span>
+tags: [<span class="string">"比赛"</span>, <span class="string">"AI"</span>]
+image: <span class="string">"/images/posts/xxx.jpg"</span>
+draft: false
+---
+
+正文内容，支持标准 Markdown 语法。
+    </div>
+
+    <div class="callout callout-info">
+      <strong>提示：</strong>也可以用命令 <code>pnpm new-post -- news/filename</code> 自动创建文章模板。
+    </div>
+  </div>
+
+  <!-- 4. Favicon -->
+  <div class="section" id="favicon">
+    <h2><span class="num">4</span>Favicon 替换</h2>
+
+    <p>当前状态：<code>public/favicon/favicon.ico</code> 存在，但仍是原 Mizuki 主题的图标。</p>
+
+    <h3>需要准备的文件</h3>
+    <ul>
+      <li><code>favicon.ico</code> — 主图标，建议包含 16×16 / 32×32 / 48×48 多尺寸</li>
+      <li><code>favicon-32x32.png</code> — 32×32 PNG</li>
+      <li><code>favicon-16x16.png</code> — 16×16 PNG</li>
+      <li><code>apple-touch-icon.png</code> — 180×180 PNG（iOS 添加到主屏幕用）</li>
+    </ul>
+
+    <h3>操作步骤</h3>
+    <ul>
+      <li>准备硅步工作室 LOGO 源文件</li>
+      <li>使用 <a href="https://realfavicongenerator.net/" target="_blank">realfavicongenerator.net</a> 生成全套 favicon</li>
+      <li>将生成的文件替换 <code>public/favicon/</code> 目录中的文件</li>
+      <li>如果没有正式 LOGO，可以用文字"硅"或"SS"做简约图标</li>
+    </ul>
+
+    <div class="callout callout-warning">
+      <strong>注意：</strong>文件名必须和现有的保持一致，否则需要同步修改 <code>astro.config.mjs</code> 中的 favicon 配置。
+    </div>
+  </div>
+
+  <!-- 5. 社交链接 -->
+  <div class="section" id="social">
+    <h2><span class="num">5</span>社交链接补充 <span class="status-tag status-done">GitHub 已更新</span></h2>
+
+    <p>当前状态：GitHub 已更新为 <code>https://github.com/DCMPjmpo</code>，小红书和微信链接为空。</p>
+
+    <p>配置文件位置：<code>src/config/profileConfig.ts</code></p>
+
+    <div class="code-block">
+links: [
+  { name: <span class="string">"GitHub"</span>, icon: <span class="string">"fa7-brands:github"</span>, url: <span class="string">"https://github.com/DCMPjmpo"</span> },  <span class="comment">// ✅ 已更新</span>
+  { name: <span class="string">"小红书"</span>, icon: <span class="string">"simple-icons:xiaohongshu"</span>, url: <span class="string">""</span> },  <span class="comment">// ← 待补充</span>
+  { name: <span class="string">"微信"</span>, icon: <span class="string">"fa7-brands:weixin"</span>, url: <span class="string">""</span> },     <span class="comment">// ← 待补充</span>
+]</div>
+
+    <h3>你需要提供的</h3>
+    <ul class="checklist">
+      <li>小红书主页 URL（格式如 <code>https://www.xiaohongshu.com/user/profile/xxxxx</code>）</li>
+      <li>微信：可以直接放公众号文章链接，或者放二维码图片地址，或者留空（留空时图标不会显示）</li>
+      <li>如果需要加其他平台（B站、知乎、邮箱等），告诉我平台名和 URL 即可</li>
+    </ul>
+  </div>
+
+  <!-- 6. 检查清单 -->
+  <div class="section" id="checklist">
+    <h2><span class="num">6</span>最终检查清单</h2>
+
+    <p>按优先级排序，完成一项勾一项：</p>
+
+    <ul class="checklist">
+      <li><strong>【高】</strong>准备项目封面图，放入 <code>public/images/projects/</code></li>
+      <li><strong>【高】</strong>确认哪些产品有真实线上 URL，补充到 <code>projects.ts</code></li>
+      <li><strong>【高】</strong>准备工作室 LOGO / 头像图片</li>
+      <li><strong>【中】</strong>准备文章封面图</li>
+      <li><strong>【中】</strong>准备 favicon 文件并替换</li>
+      <li><strong>【中】</strong>补充小红书 / 微信链接</li>
+      <li><strong>【中】</strong>撰写更多 Journal 文章</li>
+      <li><strong>【低】</strong>准备团队合照放入 <code>public/images/team/</code></li>
+      <li><strong>【低】</strong>准备活动照片放入 <code>public/images/events/</code></li>
+    </ul>
+
+    <div class="callout callout-success">
+      <strong>当前网站状态：</strong>网站已可以正常访问和部署。以上内容都是锦上添花的优化，不影响网站运行。你可以随时把准备好的素材发给我，我帮你批量更新到代码里并推送到 GitHub。
+    </div>
+  </div>
+
+  <div class="footer">
+    硅步工作室 · Silicon Step Studio<br>
+    AI Productization · Build · Explore · Ship<br>
+    NANNING · CHINA
+  </div>
+</div>
+
+</body>
+</html>
