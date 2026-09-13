@@ -2,7 +2,7 @@ import type { ProfileConfig } from "../types/config";
 
 // 个人资料配置
 export const profileConfig: ProfileConfig = {
-	avatar: "/images/posts/avatar.jpg",
+	avatar: "assets/images/avatar.webp",
 	name: "硅步工作室",
 	bio: "AI 技术赋能 · 产品化 · 创造与探索",
 	typewriter: {

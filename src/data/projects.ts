@@ -89,6 +89,7 @@ export const projectsData: Project[] = [
 		featured: true,
 		tags: ["AI", "农业科技", "物联网", "计算机视觉"],
 		showImage: false,
+		sourceCode: "https://github.com/DCMPjmpo/panyuan",
 	},
 	// Hardware 类
 	{
