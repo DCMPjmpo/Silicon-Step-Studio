@@ -141,12 +141,12 @@ export const navBarConfig: NavBarConfig = {
 		// 动态（下拉菜单）
 		{
 			name: "Journal",
-			url: "/",
+			url: "/archive/",
 			icon: "material-symbols:article",
 			children: [
 				{
 					name: "全部动态",
-					url: "/",
+					url: "/archive/",
 					icon: "material-symbols:format-list-bulleted",
 				},
 				LinkPreset.Archive,
@@ -160,23 +160,18 @@ export const navBarConfig: NavBarConfig = {
 			icon: "material-symbols:explore",
 			children: [
 				{
-					name: "出海观察",
-					url: "/tags/出海/",
-					icon: "material-symbols:public",
+					name: "归档",
+					url: "/archive/",
+					icon: "material-symbols:archive",
 				},
 				{
-					name: "南宁现场",
-					url: "/tags/南宁/",
-					icon: "material-symbols:location-on",
+					name: "时间线",
+					url: "/timeline/",
+					icon: "material-symbols:timeline",
 				},
 				{
-					name: "技术分享",
-					url: "/tags/技术/",
-					icon: "material-symbols:code",
-				},
-				{
-					name: "社区活动",
-					url: "/tags/社区/",
+					name: "社区伙伴",
+					url: "/friends/",
 					icon: "material-symbols:groups",
 				},
 			],
